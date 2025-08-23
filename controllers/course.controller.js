@@ -26,7 +26,7 @@ const updateCourse = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Something went wrong, please try again later" });
+      .json({ message: "Something went wrong, please try again later " });
   }
 };
 
@@ -151,11 +151,40 @@ const searchCourse = async (req, res) => {
 
     res.status(200).json({ message: `Serach results for ${query}`, courses });
   } catch (error) {
+    console.log(error)
     res
       .status(500)
       .json({ message: "Something went wrong, please try again later" });
   }
 };
+
+const courseEnrollment=async(req,res)=>{
+  try {
+      let userId=req.user
+      let {id}=req.params
+      let course=await CourseModel.findById(id)
+      if(!course){
+          return res.status(404).json({message:"No course found"})
+      }
+      if(JSON.stringify(userId)===JSON.stringify(course.instructor)){
+          return res.status(400).json({message:"Can't enroll in your own course"})
+      }
+      
+      let user=await UserModel.findById(userId)
+      if(user.courses.includes(course._id)){
+        return res.status(400).json({message:"Already enrolled"})
+      }
+      console.log(userId)
+      user.courses.push(id)
+      await user.save()
+      course.students.push(userId)
+      await course.save()
+      res.status(200).json({message:`Enrolled in ${course.title} successfully`})
+  } catch (error) {
+    console.log(error)
+      res.status(500).json({message:"Something went wrong, please try again later"})
+  }
+}
 
 module.exports = {
   addCourse,
@@ -165,4 +194,5 @@ module.exports = {
   getCourseById,
   getFilteredCourse,
   searchCourse,
+  courseEnrollment
 };

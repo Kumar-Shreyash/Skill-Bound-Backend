@@ -5,7 +5,7 @@ const authMiddleware = (role) => {
   return (req, res, next) => {
     let decoded;
     try {
-      let token = req.headers?.authentication?.split(" ")[1];
+      let token = req.headers?.authorization?.split(" ")[1];
       if (token) {
         decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
       } else {
@@ -15,7 +15,7 @@ const authMiddleware = (role) => {
       }
     } catch (error) {
       if (error.message === "jwt expired") {
-        let refreshToken = req.headers?.refreshtoken?.slit(" ")[1];
+        let refreshToken = req.headers?.refreshtoken?.split(" ")[1];
         let refreshTokenDecoded = jwt.verify(
           refreshToken,
           process.env.JWT_SECRET_KEY

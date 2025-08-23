@@ -8,6 +8,7 @@ const courseSchema = new mongoose.Schema({
   duration: { type: String, required: true },
   price: { type: Number, required: true },
   image: { type: String, default: "" },
+  content: { type: Object, required: true },
   rating: [
     {
       content: { type: Number, min: 1, max: 5 },
@@ -16,6 +17,7 @@ const courseSchema = new mongoose.Schema({
       by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     },
   ],
+  totalRating:{type:Number,default:0},
   ratingCount: { type: Number, default: 0 },
   averageRating: { type: Number, default: 0 },
   reviews: [
