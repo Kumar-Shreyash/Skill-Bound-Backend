@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
     default:
       "https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg",
   },
+  totalRevenue:{type:Number,default:0}
 });
 
 const UserModel = mongoose.model("User", userSchema);

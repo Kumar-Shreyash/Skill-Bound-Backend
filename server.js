@@ -3,10 +3,12 @@ const connectToDB = require("./config/db.config");
 const AuthRouter = require("./routes/auth.routes");
 const CourseRouter = require("./routes/course.routes");
 const ReviewRouter = require("./routes/review.routes");
+const cors=require("cors")
 const app = express();
 require("dotenv").config;
 
 app.use(express.json());
+app.use(cors())
 connectToDB();
 
 app.use("/auth", AuthRouter);

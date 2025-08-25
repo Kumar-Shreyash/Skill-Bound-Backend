@@ -67,8 +67,12 @@ const getCourseById = async (req, res) => {
   try {
     let { id } = req.params;
     let course = await CourseModel.findById(id);
-    if (!course) {
+    let course1=await CourseModel.find({instructor:id})
+    if (!course && !course1) {
       return res.status(404).json({ message: "No course found" });
+    }
+    if(!course && course1){
+      return res.status(200).json({message:"Course found",course1})
     }
     res.status(200).json({ message: "Course found", course });
   } catch (error) {
@@ -169,7 +173,7 @@ const courseEnrollment=async(req,res)=>{
       if(JSON.stringify(userId)===JSON.stringify(course.instructor)){
           return res.status(400).json({message:"Can't enroll in your own course"})
       }
-      
+      let instructor=await UserModel.findById(course.instructor)
       let user=await UserModel.findById(userId)
       if(user.courses.includes(course._id)){
         return res.status(400).json({message:"Already enrolled"})
@@ -179,6 +183,8 @@ const courseEnrollment=async(req,res)=>{
       await user.save()
       course.students.push(userId)
       await course.save()
+      instructor.totalRevenue+=+course.price
+      await instructor.save()
       res.status(200).json({message:`Enrolled in ${course.title} successfully`})
   } catch (error) {
     console.log(error)

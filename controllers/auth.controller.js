@@ -55,7 +55,7 @@ const login = async (req, res) => {
         );
         return res
           .status(200)
-          .json({ message: "Login Successful", accessToken, refreshToken });
+          .json({ message: "Login Successful", accessToken, refreshToken,user});
       } else {
         return res
           .status(401)
