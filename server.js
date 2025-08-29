@@ -6,6 +6,7 @@ const ReviewRouter = require("./routes/review.routes");
 const cors=require("cors")
 const app = express();
 require("dotenv").config;
+const PORT=process.env.PORT || 3000
 
 app.use(express.json());
 app.use(cors())
@@ -21,6 +22,6 @@ app.use((req, res) => {
   res.status(404).json({ message: "Invalid Route" });
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log("Server Running...");
 });
