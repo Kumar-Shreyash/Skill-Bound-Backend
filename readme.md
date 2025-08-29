@@ -45,17 +45,17 @@ Skill-Bound/
 > _Add your screenshots here in this section for each key feature/page._
 
 - **Landing Page**
-![Landing Page](./src/assets/screenshots/home.png)
-![Landing Page Course](./src/assets/screenshots/homeCour.png)
+![Landing Page](./assets/home.png)
+![Landing Page Course](./assets/homeCour.png)
 
 
 - **Dashboard**
-![Dashboard](./src/assets/screenshots/dashboardCourses.png)
-![Dashboard Footer](./src/assets/screenshots/dashboardFooter.png)
+![Dashboard](./assets/dashboardCourses.png)
+![Dashboard Footer](./assets/dashboardFooter.png)
 
 - **Course Builder Modal**
-![Add Course Modal](./src/assets/screenshots/addCourse.png)
-![Update Course Modal](./src/assets/screenshots/updateCourse.png)
+![Add Course Modal](./assets/addCourse.png)
+![Update Course Modal](./assets/updateCourse.png)
 
 
 
