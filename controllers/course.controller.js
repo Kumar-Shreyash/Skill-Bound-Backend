@@ -18,7 +18,7 @@ const updateCourse = async (req, res) => {
     let userId = req.user;
     let { id } = req.params;
     let course = await CourseModel.findById(id);
-    if (!course || course.instructor !== userId) {
+    if (!course || course.instructor.toString() !== userId) {
       return res.status(404).json({ message: "No course found." });
     }
     await CourseModel.findByIdAndUpdate(id, req.body);
